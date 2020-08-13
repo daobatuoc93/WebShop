@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WebShop.DATA.Extensions;
 
 namespace WebShop.DATA.EF
 {
@@ -33,6 +34,8 @@ namespace WebShop.DATA.EF
             modelBuilder.ApplyConfiguration(new ProductImageConfiguration());
 
             //base.OnModelCreating(modelBuilder);
+            //data Seeding
+            modelBuilder.Seed();
         }
 
         public DbSet<Product> Products { get; set; }
