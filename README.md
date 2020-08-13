@@ -47,3 +47,14 @@
 - Refer Dataseeding in tutor and move to EF core DATASEEDING.
 - Create Extensions with ModelBuilderExtensions with Record Data
 - Add modelBuilder.Seed() to DbContext and Add-Migation NewDataSeeding 
+## Adding Identity Table 
+- Refer to Sercurity and Identity in EFCore 3.1x
+- Purpose:authentication and authorization
+- Create IdentityDbContext<AppUsers,AppRoles,Key(guid recommend)>
+- Create class AppUser : IdentityUser<Guid>
+- Create class AppRole : IdentityRole<Guid>
+- Configure AppRoleConfiguration and AppUserConfiguration : IEntityTypeConfiguration<AppRole>
+- make sure that we need to add it on OnmodelCreating
+- Create Key for Configuration Appuser,AppRoles related to about Cart,Transactions...
+- Creat Data Seeding User to Database, Create two Data : Entity<AppUser>,Entity<AppRole>
+and Seeding the relation between our user and role to AspNetUserRoles table

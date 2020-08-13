@@ -13,7 +13,9 @@ namespace WebShop.DATA.Configuration
         {
             builder.ToTable("AppRoles");
 
-            builder.Property(x => x.Description).HasMaxLength(200).IsRequired();
+            builder.Property(x => x.Description)
+                .HasMaxLength(200)
+                .IsRequired();
 
         }
     }
