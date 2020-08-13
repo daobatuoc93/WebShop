@@ -47,3 +47,4 @@
 - Refer Dataseeding in tutor and move to EF core DATASEEDING.
 - Create Extensions with ModelBuilderExtensions with Record Data
 - Add modelBuilder.Seed() to DbContext and Add-Migation NewDataSeeding 
+## Before going to learn Identity ,Backup Feature/develop Dataseeding to avoidLoosingfile
