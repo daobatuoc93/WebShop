@@ -12,7 +12,7 @@ namespace WebShop.DATA.Configuration
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder.ToTable("Category Table");
+            builder.ToTable("Categories");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Status).HasDefaultValue(Status.Active);
         }

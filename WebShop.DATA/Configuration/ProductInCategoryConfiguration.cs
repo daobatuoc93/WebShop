@@ -11,7 +11,7 @@ namespace WebShop.DATA.Configuration
     {
         public void Configure(EntityTypeBuilder<ProductInCategory> builder)
         {
-            builder.ToTable("===========Product In Categories!==========");
+            builder.ToTable("Product Categories");
             builder.HasKey(t => new { t.CategoryId, t.ProductId });
             builder.HasOne(t => t.Product)
                    .WithMany(t => t.ProductInCategories)
