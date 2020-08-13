@@ -20,11 +20,13 @@
 - After migrate database successful, set Startup Project is eShopSolution.WebApp
 - Change database connection in appsettings.Development.json in eShopSolution.WebApp project.
 - Choose profile to run or press F5
-## Learning Details
-# Create Web Solution
+#
+# Learning Details
+#
+## Create Web Solution
 - Create web solution and source code repository
 - Create Solution structure
-# Design system functions and Database
+## Design system functions and Database
 - Download and Install EntityFrameworkCore(3.1x)
 - =====================Design(3.1x)
 - =====================SqlServer(3.1x)
@@ -32,16 +34,16 @@
 - Create EF folder
 - Create properties and setting key for these entities 
 - Create WebshopDbContext and Creat WebShopContextFactories
-# Create Entity Classes and Set up EF core
+## Create Entity Classes and Set up EF core
 - Create Entity Folder and Set up Ef core
 - Create Entity Class based on Entity set up before
-# Config Entity with Fluent API 
+## Config Entity with Fluent API 
 - Config Entities with fluent api via IEntityTypeConfiguration
 - Create Configuration Folder and Config 
 - Add it on Dbcontext with new Configurations
-# Migration with our config
+## Migration with our config
 - Create InitialWebShop Migration to SqlServer
-# Create Template Recording Data with DATA SEEDING
+## Create Template Recording Data with DATA SEEDING
 - Refer Dataseeding in tutor and move to EF core DATASEEDING.
 - Create Extensions with ModelBuilderExtensions with Record Data
 - Add modelBuilder.Seed() to DbContext and Add-Migation NewDataSeeding 
