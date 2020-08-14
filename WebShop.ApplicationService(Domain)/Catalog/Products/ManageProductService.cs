@@ -1,25 +1,29 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.IO;
 using System.Linq;
-using System.Text;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObjects;
-using WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObjects.DtoManage;
-using WebShop.ApplicationService_Domain_.DataTransferObjects;
+using WebShop.ApplicationService_Domain_.Catalog.Common;
 using WebShop.DATA.EF;
 using WebShop.DATA.Entity;
 using WebShop.Utilities.Exceptions;
+using WebShop.ViewModels.Catalog.Common;
+using WebShop.ViewModels.Catalog.Product;
+using WebShop.ViewModels.Catalog.Product.DtoManage;
+
 namespace WebShop.ApplicationService_Domain_.Catalog.Products
 {
     public class ManageProductService : IManageProductService
     {
         private readonly WebShopDbContext _context;
-        public ManageProductService(WebShopDbContext context)
+        private readonly IStorageService _stogareService;
+        public ManageProductService(WebShopDbContext context,IStorageService stogareService)
         {
             _context = context;
+            _stogareService = stogareService;
         }
 
         public async Task AddViewCount(int productId)
@@ -52,6 +56,22 @@ namespace WebShop.ApplicationService_Domain_.Catalog.Products
                     }
                 }
             };
+            //Save Image
+            if(request.ThumbnailImage != null)
+            {
+                product.ProductImages = new List<ProductImage>()
+                {
+                    new ProductImage()
+                    {
+                        Caption = "Thumbnail Image",
+                        DateCreated = DateTime.Now,
+                        FileSize = request.ThumbnailImage.Length,
+                       ImagePath=await this.SaveFile(request.ThumbnailImage),
+                       IsDefault = true,
+                       SortOrder = 1,
+                    }
+                };
+            }
             _context.Products.Add(product);
             return await _context.SaveChangesAsync();
         }
@@ -64,6 +84,11 @@ namespace WebShop.ApplicationService_Domain_.Catalog.Products
                 throw new WebShopException($"the {productId} is not existing! ");
             }
             _context.Products.Remove(product);
+            var images = _context.ProductImages.Where(i =>i.ProductId == product.Id);
+            foreach(var image in images)
+            {
+                await _stogareService.DeleteFileAsync(image.ImagePath);
+            }
             return await _context.SaveChangesAsync();
         }
         public async Task<PageResult<ProductViewModel>> GetAllPage(GetProductPagingRequest request)
@@ -111,6 +136,14 @@ namespace WebShop.ApplicationService_Domain_.Catalog.Products
             return pageResult;
         }
 
+        public async Task<string> SaveFile(IFormFile file)
+        {
+            var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+            var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
+            await _stogareService.SaveFileAsync(file.OpenReadStream(), fileName);
+            return fileName;
+        }
+
         public async Task<int> Update(ProductUpdateRequest request)
         {
             var product = await _context.Products.FindAsync(request.Id);
@@ -124,6 +157,17 @@ namespace WebShop.ApplicationService_Domain_.Catalog.Products
             producTranslations.SeoTitle = request.SeoTitle;
             producTranslations.Description = request.Description;
             producTranslations.Details = request.Details;
+            //Save Image
+            if (request.ThumbnailImage != null)
+            {
+                var thumbnailImage = await _context.ProductImages.FirstOrDefaultAsync(i => i.IsDefault == true && i.ProductId == request.Id);
+                if (thumbnailImage != null)
+                {
+                    thumbnailImage.FileSize = request.ThumbnailImage.Length;
+                    thumbnailImage.ImagePath = await this.SaveFile(request.ThumbnailImage);
+                    _context.ProductImages.Update(thumbnailImage);
+                }
+            }
             return await _context.SaveChangesAsync();
         }
 

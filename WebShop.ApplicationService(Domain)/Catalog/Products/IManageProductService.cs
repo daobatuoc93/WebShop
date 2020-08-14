@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObjects;
-using WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObjects.DtoManage;
-using WebShop.ApplicationService_Domain_.DataTransferObjects;
+using WebShop.ViewModels.Catalog.Common;
+using WebShop.ViewModels.Catalog.Product;
+using WebShop.ViewModels.Catalog.Product.DtoManage;
 
 namespace WebShop.ApplicationService_Domain_.Catalog
 {
@@ -17,5 +18,6 @@ namespace WebShop.ApplicationService_Domain_.Catalog
         Task<bool> UpdatePrice(int productID,decimal newPrice);
         Task AddViewCount(int productId);
         Task<bool> UpdateStock(int productId, int addQuantity);
+        Task<string> SaveFile(IFormFile file);
     }
 }

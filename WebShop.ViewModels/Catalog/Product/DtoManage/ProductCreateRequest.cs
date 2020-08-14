@@ -1,10 +1,13 @@
-﻿using System;
+﻿
+using Microsoft.AspNetCore.Http;
 
-namespace WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObjects.DtoManage
+namespace WebShop.ViewModels.Catalog.Product.DtoManage
 {
-    public class ProductUpdateRequest
+    public class ProductCreateRequest
     {
-        public int Id { set; get; }
+        public decimal Price { get; set; }
+        public decimal OriginalPrice { get; set; }
+        public int Stock { get; set; }
         public string Name { set; get; }
         public string Description { set; get; }
         public string Details { set; get; }
@@ -12,6 +15,6 @@ namespace WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObject
         public string SeoTitle { set; get; }
         public string SeoAlias { get; set; }
         public string LanguageId { set; get; }
-
+        public IFormFile ThumbnailImage { get; set; }
     }
 }

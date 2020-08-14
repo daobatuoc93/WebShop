@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObjects;
-using WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObjects.DtoPublic;
-using WebShop.ApplicationService_Domain_.DataTransferObjects;
+﻿using System.Threading.Tasks;
+using WebShop.ViewModels.Catalog.Common;
+using WebShop.ViewModels.Catalog.Product;
+using WebShop.ViewModels.Catalog.Product.DtoPublic;
 
 namespace WebShop.ApplicationService_Domain_.Catalog.Products
 {

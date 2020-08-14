@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObjects
+namespace WebShop.ViewModels.Catalog.Product
 {
     //return list product
     public class ProductViewModel

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Text;
-using WebShop.ApplicationService_Domain_.DataTransferObjects;
-namespace WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObjects.DtoManage
+using WebShop.ViewModels.Catalog.Common;
+
+namespace WebShop.ViewModels.Catalog.Product.DtoManage
 {
     public class GetProductPagingRequest : PagingRequestBase
     {
