@@ -56,5 +56,16 @@
 - Configure AppRoleConfiguration and AppUserConfiguration : IEntityTypeConfiguration<AppRole>
 - make sure that we need to add it on OnmodelCreating
 - Create Key for Configuration Appuser,AppRoles related to about Cart,Transactions...
-- Creat Data Seeding User to Database, Create two Data : Entity<AppUser>,Entity<AppRole>
+- Creat Data Seeding User to Database, Create two Data : "Entity<AppUser>,Entity<AppRole>"
 and Seeding the relation between our user and role to AspNetUserRoles table
+## Create application layer structure
+- Prerequisite: Refer SOLID principles,Dependency injection pattern and Viewmodel
+  - in which: D with Dependency inverse--> Dependency injection
+- Create Folder Catalog at Application Layer
+- create interface class IPublicProduc and ImanageProductservice
+- creat dtomanage and dtopublic
+- insert delete,add,update,search(separate page)
+- query dbcontext by LINQ
+- add class contain properties of product and detail information in DtoMANAGE(Getproduct,update,create..)
+- add DTOs folder include PagingRequetBase
+- Detail at course Tedu(12,13,14) -https://www.youtube.com/watch?v=sRiQup8FZ8Q&list=PLRhlTlpDUWsyN_FiVQrDWMtHix_E2A_UD&index=14

@@ -5,4 +5,14 @@
     <RootNamespace>WebShop.ApplicationService_Domain_</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include="..\WebShop.ApplicationService%2528Domain%2529\DTOs\PageResult.cs" />
+    <Compile Include="..\WebShop.ApplicationService%2528Domain%2529\DTOs\PagingRequestBase.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebShop.DATA\WebShop.DATA.csproj" />
+    <ProjectReference Include="..\WebShop.Utilities\WebShop.Utilities.csproj" />
+  </ItemGroup>
+
 </Project>
