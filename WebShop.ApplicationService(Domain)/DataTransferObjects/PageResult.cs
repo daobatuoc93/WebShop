@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WebShop.ApplicationService_Domain_.Catalog.DTOs
+namespace WebShop.ApplicationService_Domain_.DataTransferObjects
 {
     public class PageResult<T>
     {

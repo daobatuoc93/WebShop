@@ -6,12 +6,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebShop.ApplicationService_Domain_.DTOs;
+using WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObjects;
+using WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObjects.DtoManage;
+using WebShop.ApplicationService_Domain_.DataTransferObjects;
 using WebShop.DATA.EF;
 using WebShop.DATA.Entity;
 using WebShop.Utilities.Exceptions;
-
-namespace WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObjects.DtoManage
+namespace WebShop.ApplicationService_Domain_.Catalog.Products
 {
     public class ManageProductService : IManageProductService
     {
@@ -58,7 +59,7 @@ namespace WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObject
         public async Task<int> Delete(int productId)
         {
             var product = await _context.Products.FindAsync(productId);
-            if(product == null)
+            if (product == null)
             {
                 throw new WebShopException($"the {productId} is not existing! ");
             }
@@ -72,7 +73,7 @@ namespace WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObject
                         join pt in _context.ProductTranslations on product.Id equals pt.ProductId
                         join p in _context.ProductInCategories on product.Id equals p.ProductId
                         join c in _context.Categories on product.Id equals c.Id
-                        select new { product, pt,p };
+                        select new { product, pt, p };
             //2.filter
             if (!string.IsNullOrEmpty(request.keyWord))
                 query = query.Where(x => x.pt.Name.Contains(request.keyWord));
@@ -97,7 +98,7 @@ namespace WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObject
                     SeoAlias = p.pt.SeoAlias,
                     SeoDescription = p.pt.SeoDescription,
                     SeoTitle = p.pt.SeoTitle,
-                    Stock  = p.product.Stock,
+                    Stock = p.product.Stock,
                     ViewCount = p.product.ViewCount,
                 })
                 .ToListAsync();
@@ -128,7 +129,7 @@ namespace WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObject
 
         public async Task<bool> UpdatePrice(int productID, decimal newPrice)
         {
-            var product = await _context.Products.FindAsync(productID);            
+            var product = await _context.Products.FindAsync(productID);
             if (product == null)
             {
                 throw new WebShopException($"the Produc with {productID} is not existing to update price!");

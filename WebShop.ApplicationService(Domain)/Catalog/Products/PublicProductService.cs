@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebShop.ApplicationService_Domain_.Catalog.Products.DTOs;
+using WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObjects;
+using WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObjects.DtoPublic;
+using WebShop.ApplicationService_Domain_.DataTransferObjects;
 using WebShop.DATA.EF;
 
-namespace WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObjects.DtoPublic
+namespace WebShop.ApplicationService_Domain_.Catalog.Products
 {
-
     public class PublicProductService : IPublicProduct
     {
         private readonly WebShopDbContext _context;
@@ -30,7 +31,7 @@ namespace WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObject
                 productCategory = productCategory.Where(p => p.pic.CategoryId == request.CatagoryId);
             //Paging
             int totalRow = await productCategory.CountAsync();
-            
+
             //take pageSize
             var data = await productCategory.Skip((request.pageSize - 1) * request.pageSize)
                 .Take(request.pageSize)
