@@ -12,11 +12,7 @@ namespace WebShop.DATA.Extensions
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AppConfig>().HasData(
-               new AppConfig() { Key = "HomeTitle", Value = "This is home page of eShopSolution" },
-               new AppConfig() { Key = "HomeKeyword", Value = "This is keyword of eShopSolution" },
-               new AppConfig() { Key = "HomeDescription", Value = "This is description of eShopSolution" }
-               );
+
             modelBuilder.Entity<Language>().HasData(
                 new Language() { Id = "vi-VN", Name = "Tiếng Việt", IsDefault = true },
                 new Language() { Id = "en-US", Name = "English", IsDefault = false });
@@ -85,42 +81,86 @@ namespace WebShop.DATA.Extensions
                 new ProductInCategory() { ProductId = 1, CategoryId = 1 }
                 );
 
-            // any guid
-            var roleId = new Guid("8D04DCE2-969A-435D-BBA4-DF3F325983DC");
-            var adminId = new Guid("69BD714F-9576-45BA-B5B7-F00649BE00DE");
-            modelBuilder.Entity<AppRole>().HasData(new AppRole
-            {
-                Id = roleId,
-                Name = "admin",
-                NormalizedName = "admin",
-                Description = "Administrator role"
-            });
+            var RoleId = new Guid("4D685845-5F78-4C41-87B6-E4F49C3D490E");
+            var adminId = new Guid("42D93CE2-E383-4CE9-9B31-E99D56ED7FA3");
+            //Seeding a  'Administrator' role to AspNetRoles table
+            modelBuilder.Entity<AppRole>()
+                .HasData(new AppRole
+                {
+                    Id = RoleId,
+                    Name = "Administrator",
+                    NormalizedName = "ADMINISTRATOR".ToUpper(),
+                    Description = "Administrator role"
+                });
 
-            var hasher = new PasswordHasher<AppUser>();
-            modelBuilder.Entity<AppUser>().HasData(new AppUser
-            {
-                Id = adminId,
-                UserName = "admin",
-                NormalizedUserName = "admin",
-                Email = "tedu.international@gmail.com",
-                NormalizedEmail = "tedu.international@gmail.com",
-                EmailConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, "Abcd1234$"),
-                SecurityStamp = string.Empty,
-                FirstName = "Toan",
-                LastName = "Bach",
-                Dob = new DateTime(2020, 01, 31)
-            });
 
-            modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
-            {
-                RoleId = roleId,
-                UserId = adminId
-            });
+            //a hasher to hash the password before seeding the user to the db
+            var hasher = new PasswordHasher<IdentityUser>();
+            //Seeding the User to AspNetUsers table
+            modelBuilder.Entity<AppUser>().HasData(
+                new AppUser
+                {
+                    Id = adminId, // primary key
+                    UserName = "tuocdaoba",
+                    NormalizedUserName = "tuocdaoba",
+                    PasswordHash = hasher.HashPassword(null, "123456qwe"),
+                    Email = "tuocdaoba@icloud.com",
+                    EmailConfirmed = true,
+                    NormalizedEmail = "tuocdaoba@icloud.com",
+                    SecurityStamp = string.Empty,
+                    FirstName = "Dao Ba",
+                    LastName = "Tuoc",
+                    Dob = new DateTime(1993,08,11)
+
+                }
+            );
+            //Seeding the relation between our user and role to AspNetUserRoles table
+            modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(
+                new IdentityUserRole<Guid>
+                {
+                    RoleId = RoleId,
+                    UserId = adminId
+                }
+            );
+
+
         }
+        // any guid
+        //var roleId = new Guid("8D04DCE2-969A-435D-BBA4-DF3F325983DC");
+        //var adminId = new Guid("69BD714F-9576-45BA-B5B7-F00649BE00DE");
+        //modelBuilder.Entity<AppRole>().HasData(new AppRole
+        //{
+        //    Id = roleId,
+        //    Name = "admin",
+        //    NormalizedName = "admin",
+        //    Description = "Administrator role"
+        //});
 
+        //var hasher = new PasswordHasher<AppUser>();
+        //modelBuilder.Entity<AppUser>().HasData(new AppUser
+        //{
+        //    Id = adminId,
+        //    UserName = "admin",
+        //    NormalizedUserName = "admin",
+        //    Email = "tedu.international@gmail.com",
+        //    NormalizedEmail = "tedu.international@gmail.com",
+        //    EmailConfirmed = true,
+        //    PasswordHash = hasher.HashPassword(null, "Abcd1234$"),
+        //    SecurityStamp = string.Empty,
+        //    FirstName = "Toan",
+        //    LastName = "Bach",
+        //    Dob = new DateTime(2020, 01, 31)
+        //});
 
-
-
+        //modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
+        //{
+        //    RoleId = roleId,
+        //    UserId = adminId
+        //});
     }
+
+
+
+
+    
 }

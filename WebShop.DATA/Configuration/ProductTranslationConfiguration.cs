@@ -11,7 +11,7 @@ namespace WebShop.DATA.Configuration
     {
         public void Configure(EntityTypeBuilder<ProductTranslation> builder)
         {
-            builder.ToTable("ProductTranslations");
+            builder.ToTable("Product Translations");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseIdentityColumn();
