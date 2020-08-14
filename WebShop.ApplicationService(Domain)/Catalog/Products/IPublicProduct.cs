@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using WebShop.ApplicationService_Domain_.Catalog.Products.DTOs;
 using System.Threading.Tasks;
 using WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObjects;
 using WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObjects.DtoPublic;
+using WebShop.ApplicationService_Domain_.DTOs;
 
 namespace WebShop.ApplicationService_Domain_.Catalog.Products
 {

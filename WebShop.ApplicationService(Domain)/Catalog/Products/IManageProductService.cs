@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObjects;
 using WebShop.ApplicationService_Domain_.Catalog.Products.DataTransferObjects.DtoManage;
-using WebShop.ApplicationService_Domain_.Catalog.Products.DTOs;
+using WebShop.ApplicationService_Domain_.DTOs;
 
 namespace WebShop.ApplicationService_Domain_.Catalog
 {
