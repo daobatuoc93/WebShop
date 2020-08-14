@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebShop.ApplicationService_Domain_.Catalog.Products.DTOs;
+using WebShop.ApplicationService_Domain_.DTOs;
 using WebShop.DATA.EF;
 using WebShop.DATA.Entity;
 using WebShop.Utilities.Exceptions;
