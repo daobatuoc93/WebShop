@@ -5,4 +5,9 @@
     <RootNamespace>WebShop.ApplicationService_Domain_</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WebShop.DATA\WebShop.DATA.csproj" />
+    <ProjectReference Include="..\WebShop.Utilities\WebShop.Utilities.csproj" />
+  </ItemGroup>
+
 </Project>
